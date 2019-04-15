@@ -1,0 +1,50 @@
+{
+  "name": "cbrf-bank-loader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "cbrf-bank-loader": "dist/bin/cbrf-bank-loader.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch",
+    "babel-node": "babel-node",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublishOnly": "npm run build",
+    "eslint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mixassio/bank_loader.git"
+  },
+  "keywords": [],
+  "author": "mixassio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mixassio/bank_loader/issues"
+  },
+  "homepage": "https://github.com/mixassio/bank_loader#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "commander": "^2.20.0",
+    "debug": "^4.1.1",
+    "lodash": "^4.17.11",
+    "xmldom": "^0.1.27"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.17.1"
+  }
+}
