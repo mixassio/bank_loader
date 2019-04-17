@@ -1,9 +1,7 @@
 {
-    "presets": [
-      ["@babel/env", {
-        "targets": { "node": "current" },
-        "ignoreBrowserslistConfig": true
-      }]
-    ]
-  }
+  "presets": [
+    "@babel/preset-env", 
+    "@babel/preset-react"
+  ]
+}
   
