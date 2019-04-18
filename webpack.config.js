@@ -1,8 +1,13 @@
+const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: './src/index.jsx',
+  output: {
+    path: path.join(__dirname, '/dist'),
+    filename: 'index_bundle.js',
+  },
   module: {
     rules: [
       {
