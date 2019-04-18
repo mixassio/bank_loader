@@ -6,7 +6,7 @@ import './styles.css';
 class App extends React.Component {
   state = {
     uploadedFileContents: null,
-    waitingForFileUpload: false
+    waitingForFileUpload: false,
   };
 
   static readUploadedFileAsText = (inputFile) => {
@@ -44,12 +44,12 @@ class App extends React.Component {
       const fileContents = await App.readUploadedFileAsText(latestUploadedFile);
       this.setState({
         uploadedFileContents: fileContents,
-        waitingForFileUpload: false
+        waitingForFileUpload: false,
       });
     } catch (e) {
       console.log(e);
       this.setState({
-        waitingForFileUpload: false
+        waitingForFileUpload: false,
       });
     }
   };
@@ -72,5 +72,5 @@ class App extends React.Component {
   }
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
