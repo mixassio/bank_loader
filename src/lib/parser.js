@@ -1,4 +1,5 @@
 
+// eslint-disable-next-line max-len
 // ['USER', 'TYPE', 'BANKL', 'BANKA', 'NAME1', 'NAME2', 'NAME3', 'NAME4', 'BNKLZ', 'REGION', 'POST_CODE1', 'CITI1', 'CITI2', 'STREET', 'HOUSE_NUM1', 'HOUSE_NUM2', 'BUILDING', 'FLOOR', 'ROOMNUMBER', 'STRAS', 'BRNCH', 'SWIFT', 'TEL_NUM1', 'BANK_DELETE', 'fc__uuid']
 
 const parser = {
