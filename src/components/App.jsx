@@ -1,6 +1,7 @@
 import React from 'react';
 import Papa from 'papaparse';
 import _ from 'lodash';
+import parserBank from '../lib/parser';
 
 class App extends React.Component {
   constructor(props) {
@@ -99,8 +100,11 @@ class App extends React.Component {
   };
 
   downloadTxtFile = () => {
+    const { banksNew, header } = this.state;
+    const myData = [header.join(';'), ...banksNew.map(bank => parserBank[bank.PtType](bank))].filter(el => el.length > 0).join('\r\n');
+    console.log(myData);
     const element = document.createElement('a');
-    const file = new Blob(['my text'], { type: 'text/plain' });
+    const file = new Blob([myData], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
     element.download = 'myFile.txt';
     document.body.appendChild(element); // Required for this to work in FireFox
