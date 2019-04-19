@@ -10,6 +10,7 @@ class App extends React.Component {
       waitingForXMLUpload: false,
       currentBanksBD: [],
       banksNew: [],
+      header: [],
       '00': [],
       '10': [],
       '12': [],
@@ -30,7 +31,7 @@ class App extends React.Component {
     };
   }
 
-  static readUploadedFileAsText = (inputFile) => {
+  static readUploadedFileAsText = (inputFile, encode = 'utf-8') => {
     const temporaryFileReader = new FileReader();
     return new Promise((resolve, reject) => {
       temporaryFileReader.onerror = () => {
@@ -40,7 +41,7 @@ class App extends React.Component {
       temporaryFileReader.onload = () => {
         resolve(temporaryFileReader.result);
       };
-      temporaryFileReader.readAsText(inputFile);
+      temporaryFileReader.readAsText(inputFile, encode);
     });
   };
 
@@ -52,9 +53,11 @@ class App extends React.Component {
       const fileContents = await App.readUploadedFileAsText(latestUploadedFile);
       const dataParsed = Papa.parse(fileContents, { encoding: 'utf-8' });
       const { data: [keys, ...values] } = dataParsed;
+      console.log(keys, values)
       this.setState({
         currentBanksBD: values.map(bank => _.zipObject(keys, bank)),
         waitingForCSVUpload: false,
+        header: keys,
       });
     } catch (err) {
       console.log(err);
@@ -69,7 +72,7 @@ class App extends React.Component {
     this.setState({ waitingForXMLUpload: true });
     const latestUploadedFile = fileList.item(fileList.length - 1);
     try {
-      const fileContents = await App.readUploadedFileAsText(latestUploadedFile);
+      const fileContents = await App.readUploadedFileAsText(latestUploadedFile, 'CP1251');
       const parser = new DOMParser();
       const doc = parser.parseFromString(fileContents, 'application/xml');
       const items = doc.querySelectorAll('BICDirectoryEntry');
@@ -95,6 +98,15 @@ class App extends React.Component {
     }
   };
 
+  downloadTxtFile = () => {
+    const element = document.createElement('a');
+    const file = new Blob(['my text'], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = 'myFile.txt';
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+  }
+
   render() {
     return (
       <div className="jumbotron">
@@ -105,6 +117,7 @@ class App extends React.Component {
             <input type="file" className="form-control-file" onChange={this.CSVChange} />
             <input type="file" className="form-control-file" onChange={this.XMLChange} />
             <button type="submit" className="btn btn-primary mb-2 submit">Add</button>
+            <button onClick={this.downloadTxtFile}>Download txt</button>
           </div>
         </form>
         {this.state.waitingForXMLUpload && <span>Uploading XML...</span>}
