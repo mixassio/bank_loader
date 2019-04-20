@@ -87,7 +87,7 @@ class App extends React.Component {
           .map(account => [...account.attributes].reduce((acc, el) => (
             { ...acc, [el.name]: el.textContent }
           ), {}));
-        this.setState({ [bankInfo.PtType]: [...this.state[bankInfo.PtType], { ...bankInfo, accounts, bic: item.getAttribute('BIC') }] });
+        // this.setState({ [bankInfo.PtType]: [...this.state[bankInfo.PtType], { ...bankInfo, accounts, bic: item.getAttribute('BIC') }] });
         return { ...bankInfo, accounts, bic: item.getAttribute('BIC') };
       });
       this.setState({ banksNew, waitingForXMLUpload: false });
@@ -118,12 +118,15 @@ class App extends React.Component {
         <hr className="my-4" />
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
+            <span>Banks.csv from DB</span>
             <input type="file" className="form-control-file" onChange={this.CSVChange} />
+            <span>Banks.xml from cbrf</span>
             <input type="file" className="form-control-file" onChange={this.XMLChange} />
-            <button type="submit" className="btn btn-primary mb-2 submit">Add</button>
-            <button onClick={this.downloadTxtFile}>Download txt</button>
+            <button type="submit" className="form-control-btn submit">Calc Diff</button>
           </div>
         </form>
+        <button type="button" onClick={this.downloadTxtFile}>Download Banks.txt</button>
+        <button type="button" onClick={this.downloadTxtFile}>Download Diff.txt</button>
         {this.state.waitingForXMLUpload && <span>Uploading XML...</span>}
         {this.state.waitingForCSVUpload && <span>Uploading CSV...</span>}
       </div>
