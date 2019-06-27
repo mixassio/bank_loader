@@ -3,7 +3,7 @@
 // ['USER', 'TYPE', 'BANKL', 'BANKA', 'NAME1', 'NAME2', 'NAME3', 'NAME4', 'BNKLZ', 'REGION', 'POST_CODE1', 'CITI1', 'CITI2', 'STREET', 'HOUSE_NUM1', 'HOUSE_NUM2', 'BUILDING', 'FLOOR', 'ROOMNUMBER', 'STRAS', 'BRNCH', 'SWIFT', 'TEL_NUM1', 'BANK_DELETE', 'fc__uuid']
 
 const parser = {
-  '00': () => [],
+  '00': bankObj => ['', 'ГУ ЦБ РФ', bankObj.bic, bankObj.NameP, bankObj.NameP.substr(0, 40), bankObj.NameP.substr(41, 40), '', '', bankObj.bic, bankObj.Rgn, bankObj.Ind, `${bankObj.Tnp} ${bankObj.Nnp}`, '', '', '', '', '', '', '', bankObj.Adr, '', '', '', '', ''].join(';'),
   10: bankObj => ['', 'РКЦ', bankObj.bic, bankObj.NameP, bankObj.NameP.substr(0, 40), bankObj.NameP.substr(41, 40), '', '', bankObj.bic, bankObj.Rgn, bankObj.Ind, `${bankObj.Tnp} ${bankObj.Nnp}`, '', '', '', '', '', '', '', bankObj.Adr, '', '', '', '', ''].join(';'),
   12: bankObj => ['', 'ОТДЕЛЕНИЕ ЦБ', bankObj.bic, bankObj.NameP, bankObj.NameP.substr(0, 40), bankObj.NameP.substr(41, 40), '', '', bankObj.bic, bankObj.Rgn, bankObj.Ind, `${bankObj.Tnp} ${bankObj.Nnp}`, '', '', '', '', '', '', '', bankObj.Adr, '', '', '', '', ''].join(';'),
   15: () => [],

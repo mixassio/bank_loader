@@ -54,14 +54,14 @@ class App extends React.Component {
       const fileContents = await App.readUploadedFileAsText(latestUploadedFile);
       const dataParsed = Papa.parse(fileContents, { encoding: 'utf-8' });
       const { data: [keys, ...values] } = dataParsed;
-      // console.log(keys, values);
+      console.log(keys, values);
       this.setState({
         currentBanksBD: values.map(bank => _.zipObject(keys, bank)),
         waitingForCSVUpload: false,
         header: keys,
       });
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       this.setState({
         waitingForCSVUpload: false,
       });
@@ -87,12 +87,12 @@ class App extends React.Component {
           .map(account => [...account.attributes].reduce((acc, el) => (
             { ...acc, [el.name]: el.textContent }
           ), {}));
-        // this.setState({ [bankInfo.PtType]: [...this.state[bankInfo.PtType], { ...bankInfo, accounts, bic: item.getAttribute('BIC') }] });
+        this.setState({ [bankInfo.PtType]: [...this.state[bankInfo.PtType], { ...bankInfo, accounts, bic: item.getAttribute('BIC') }] });
         return { ...bankInfo, accounts, bic: item.getAttribute('BIC') };
       });
       this.setState({ banksNew, waitingForXMLUpload: false });
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       this.setState({
         waitingForXMLUpload: false,
       });
@@ -102,7 +102,7 @@ class App extends React.Component {
   downloadTxtFile = () => {
     const { banksNew, header } = this.state;
     const myData = [header.join(';'), ...banksNew.map(bank => parserBank[bank.PtType](bank))].filter(el => el.length > 0).join('\r\n');
-    // console.log(myData);
+    console.log(myData);
     const element = document.createElement('a');
     const file = new Blob([myData], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
