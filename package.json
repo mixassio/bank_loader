@@ -28,7 +28,7 @@
   "homepage": "https://github.com/mixassio/bank_loader#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "commander": "^2.20.0",
     "css-loader": "^2.1.1",
